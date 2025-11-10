@@ -8,6 +8,7 @@ import Assessment from "./pages/Assessment";
 import Results from "./pages/Results";
 import History from "./pages/History";
 import Report from "./pages/Report";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/results/:id" element={<Results />} />
           <Route path="/history" element={<History />} />

@@ -1,12 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Activity, History } from "lucide-react";
+import UserMenu from "@/components/UserMenu";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/20 to-background flex items-center justify-center p-4">
+      <div className="absolute top-4 right-4">
+        <UserMenu />
+      </div>
       <div className="max-w-2xl w-full text-center space-y-8">
         <div className="space-y-4">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">
