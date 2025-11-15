@@ -12,7 +12,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { PrescriptionUploader, MedicationData } from "@/components/PrescriptionUploader";
-import Logo from "@/components/Logo";
 
 const SYMPTOMS = [
   "Body ache",
@@ -228,7 +227,6 @@ const Assessment = () => {
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Home
             </Button>
-            <Logo size="sm" />
           </div>
 
           <Card className="border-2 shadow-xl bg-white/95 backdrop-blur-sm">

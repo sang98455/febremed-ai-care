@@ -50,12 +50,7 @@ const UserMenu = () => {
   };
 
   if (!user) {
-    return (
-      <Button onClick={() => navigate('/auth')} variant="outline">
-        <User className="mr-2 h-4 w-4" />
-        Sign In
-      </Button>
-    );
+    return null;
   }
 
   return (

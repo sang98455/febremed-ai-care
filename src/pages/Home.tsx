@@ -1,11 +1,28 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Activity, History, Stethoscope, Heart, Shield, Brain, ArrowRight } from "lucide-react";
+import { Activity, History, Stethoscope, Heart, Shield, Brain, ArrowRight, User } from "lucide-react";
 import UserMenu from "@/components/UserMenu";
-import Logo from "@/components/Logo";
+import { supabase } from "@/integrations/supabase/client";
+import { User as SupabaseUser } from "@supabase/supabase-js";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
@@ -15,7 +32,13 @@ const Home = () => {
       
       {/* Navigation */}
       <div className="relative z-50 absolute top-4 left-4 right-4 flex items-center justify-between animate-in fade-in duration-500">
-        <Logo size="md" />
+        {!user && (
+          <Button onClick={() => navigate('/auth')} variant="outline">
+            <User className="mr-2 h-4 w-4" />
+            Sign In
+          </Button>
+        )}
+        {user && <div></div>}
         <UserMenu />
       </div>
 

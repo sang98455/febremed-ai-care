@@ -7,7 +7,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, ArrowLeft, Trash2, FileText, Activity } from "lucide-react";
 import { format } from "date-fns";
-import Logo from "@/components/Logo";
 
 const History = () => {
   const navigate = useNavigate();
@@ -97,7 +96,6 @@ const History = () => {
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
-              <Logo size="sm" />
             </div>
             <Button 
               onClick={() => navigate('/assessment')}

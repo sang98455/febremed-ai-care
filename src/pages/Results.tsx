@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, ArrowLeft, FileText, Activity, AlertTriangle, CheckCircle2 } from "lucide-react";
-import Logo from "@/components/Logo";
+import { GuidanceHub } from "@/components/GuidanceHub";
 
 const Results = () => {
   const { id } = useParams();
@@ -113,7 +113,6 @@ const Results = () => {
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
-              <Logo size="sm" />
             </div>
             <Button
               variant="outline"
@@ -255,6 +254,21 @@ const Results = () => {
             </CardContent>
           </Card>
         )}
+
+        {/* Guidance Hub - Video Guidance & Home Remedies */}
+        <GuidanceHub
+          severity={(() => {
+            const temp = assessment.temperature || assessment.current_temperature || 37;
+            if (temp >= 39) return 'HIGH';
+            if (temp >= 38) return 'MODERATE';
+            return 'LOW';
+          })()}
+          decision={assessment.decision as 'CONTINUE' | 'CONSULT_DOCTOR' | 'LIKELY_SAFE_TO_STOP'}
+          age={assessment.age || assessment.patient_age || 30}
+          symptoms={symptoms.map((s: any) => s.symptom_name || s.symptom || s)}
+          duration={assessment.duration || assessment.fever_duration || 1}
+          temperature={assessment.temperature || assessment.current_temperature}
+        />
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6">
